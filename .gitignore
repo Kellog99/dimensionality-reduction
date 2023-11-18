@@ -2,6 +2,11 @@
 /images/
 /__pycache__/
 /models/
+/data/
 
+.gitignore
+.gitattributes
+.tar
+.gz
 
 
