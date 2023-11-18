@@ -1,0 +1,7 @@
+# cartelle da non copiare
+/images/
+/__pycache__/
+/models/
+
+
+
