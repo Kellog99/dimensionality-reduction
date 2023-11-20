@@ -1,22 +1,23 @@
 model:
-  vae : True
+  model : 2
   hidden_dimension: 3
-
 
 dataset:
   datasets : ['MNIST', 'FashionMNIST', 'CIFAR10', 'KMNIST']
-  batch_size : 32
+  batch_size : 512
+
 
 optimizer:
-  epochs : 50
+  epochs : 100
   lr : 1e-4
   gamma : 0.8
+
 
 plot:
   n_images : 10 
   show_training : False
   show_pieces : False
-  show_rec : True
+  show_rec : False
 
 paths:
   net_weights : /home/andrea/Scrivania/Tesi/encoders/models/

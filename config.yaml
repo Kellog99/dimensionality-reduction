@@ -1,5 +1,5 @@
 model:
-  model : 3
+  model : 2
   hidden_dimension: 3
 
 dataset:
@@ -20,6 +20,6 @@ plot:
   show_rec : False
 
 paths:
-  net_weights : /home/x2030admin/andrea/encoders/models/
-  images : /home/x2030admin/andrea/encoders/images
-  models: /home/x2030admin/andrea/encoders/models
+  net_weights : /home/andrea/Scrivania/Tesi/encoders/models/
+  images : /home/andrea/Scrivania/Tesi/encoders/images
+  models: /home/andrea/Scrivania/Tesi/encoders/models
