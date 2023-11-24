@@ -35,7 +35,7 @@ if __name__ == '__main__':
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
         input_feat = len(train_dataset[0][0].flatten(0))
 
-        criterium = nn.L1Loss(reduction = "mean")
+        criterium = nn.MSELoss(reduction = "mean")
         
         if config['model']['model'] == 1:
             model = Autoencoder(input_dim= input_feat, 
@@ -58,7 +58,8 @@ if __name__ == '__main__':
                         hidden_dim = config['model']['hidden_dimension'], 
                         device = device, 
                         criterium = criterium).to(device)
-            optimizer = optim.Adam(model.parameters(), lr = 1e-3) 
+            optimizer = optim.Adam(model.parameters(), 
+                                   lr = 1e-4) 
 
         # Training the vae
             model, loss_train, loss_val, piece_train, piece_val = train_vae(model = model, 

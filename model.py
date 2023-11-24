@@ -167,7 +167,7 @@ class VAE(nn.Module):
         X = self.F_inv(u)
 
         ### Voglio che mu = 0 e std = 1
-        mean = torch.mean(X)
+        mean = torch.abs(torch.mean(X))
         std = torch.mean(X**2)
 
         #### proprietà densità
@@ -175,7 +175,7 @@ class VAE(nn.Module):
         lower = self.F(x)[0]
         upper = self.F(-x)[0]
 
-        domain = torch.linspace(-20, 20, 
+        domain = torch.linspace(-30, 30, 
                                steps = 500, 
                                requires_grad = True).view(-1,1).float().to(self.device)     ## positività
         
@@ -197,7 +197,7 @@ class VAE(nn.Module):
         # int f(x)dx = 1
         normality = self.criterium(p, one)
 
-        l = mean + std_loss + upper_loss + lower_loss + positivity + normality
+        l = mean + 10*std_loss + upper_loss + lower_loss + positivity + normality
         
         return l, (mean.item(), std_loss.item(), upper_loss.item(), lower_loss.item(), positivity.item(), normality.item())
 
@@ -215,7 +215,7 @@ class VAE(nn.Module):
         reconstruction2 = self.criterium(img, img_rec)
         ### Kullenback Leiberg divergence
 
-        l = identity + reconstruction1 + 500*reconstruction2
+        l = identity + reconstruction1 + 2000*reconstruction2
         
         kl = torch.mean(torch.log(density2[density2>0]))
         #logA = torch.mean(torch.log(torch.linalg.det(var)))
@@ -228,7 +228,7 @@ class VAE(nn.Module):
         else:
             kl = logA-kl
         l += kl
-        l += 1/torch.mean(det_var)
+        l += 0.001/torch.mean(det_var)
         return l, (identity.item(), reconstruction1.item(), reconstruction2.item(), kl.item())
 
 
